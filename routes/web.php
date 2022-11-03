@@ -20,9 +20,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     /* Vacantes */
-    Route::get('/dashboard' , [VacanteController::class , 'index'])->name('dashboard');
+    Route::get('/dashboard' , [VacanteController::class , 'index'])->name('vacante.index');
+    Route::get('/vacantes/create' , [VacanteController::class , 'create'])->name('vacante.create');
 });
 
 
-
+/* Adjunta las rutas */
 require __DIR__ . '/auth.php';
