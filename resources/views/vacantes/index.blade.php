@@ -7,12 +7,14 @@
 
   <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-              <div class="p-6 bg-white border-b border-gray-200">
-                  Mis vacantes
-                  Desde index.blade.php
-              </div>
-          </div>
+
+        @if (session()->has('mensaje'))
+            <div class="uppercase border border-green-600 bg-green-100 text-green-600 p-2 m-5 rounded">
+                {{ session('mensaje')}}
+            </div>
+        @endif
+
+        @livewire('mostrar-vacantes')
       </div>
   </div>
 </x-app-layout>

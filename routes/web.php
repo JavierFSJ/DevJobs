@@ -22,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /* Vacantes */
     Route::get('/dashboard' , [VacanteController::class , 'index'])->name('vacante.index');
     Route::get('/vacantes/create' , [VacanteController::class , 'create'])->name('vacante.create');
+    Route::get('/vacantes/{vacante}/edit' , [VacanteController::class , 'edit'])->name('vacante.edit');
 });
 
 

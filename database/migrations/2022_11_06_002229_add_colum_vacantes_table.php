@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vacantes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('vacantes', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacante');
+        Schema::table('vacantes', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 };
