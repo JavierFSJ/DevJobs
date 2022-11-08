@@ -18,12 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* Rutas con autenticacion */
 Route::middleware(['auth', 'verified'])->group(function () {
     /* Vacantes */
     Route::get('/dashboard' , [VacanteController::class , 'index'])->name('vacante.index');
     Route::get('/vacantes/create' , [VacanteController::class , 'create'])->name('vacante.create');
     Route::get('/vacantes/{vacante}/edit' , [VacanteController::class , 'edit'])->name('vacante.edit');
 });
+Route::get('/vacantes/{vacante}' , [VacanteController::class , 'show'])->name('vacante.show');
 
 
 /* Adjunta las rutas */

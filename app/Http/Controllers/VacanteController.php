@@ -27,6 +27,10 @@ class VacanteController extends Controller
         return view('vacantes.create');
     }
 
+    public function show(Vacante $vacante)
+    {
+        return view('vacantes.show' , compact('vacante'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -35,12 +39,8 @@ class VacanteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Vacante $vacante)
-    {   
-        $this->authorize('update' , $vacante);
-        return view('vacantes.edit' , compact('vacante'));
+    {
+        $this->authorize('update', $vacante);
+        return view('vacantes.edit', compact('vacante'));
     }
-
-    
-
-   
 }
