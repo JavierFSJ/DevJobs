@@ -12,14 +12,16 @@
 
                 <!-- Navigation Links -->
                 @auth
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('vacante.index')" :active="request()->routeIs('vacante.index')">
-                            {{ __('Vacantes') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('vacante.create')" :active="request()->routeIs('vacante.create')">
-                            {{ __('Nueva Vacante') }}
-                        </x-nav-link>
-                    </div>
+                    @can('create', App\Models\Vacante::class)
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link :href="route('vacante.index')" :active="request()->routeIs('vacante.index')">
+                                {{ __('Vacantes') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('vacante.create')" :active="request()->routeIs('vacante.create')">
+                                {{ __('Nueva Vacante') }}
+                            </x-nav-link>
+                        </div>
+                    @endcan
                 @endauth
 
 
@@ -38,6 +40,12 @@
                     </div>
                 @endguest
                 @auth
+                    @if (auth()->user()->rol === 1)
+                        <a class=" text-white mr-2 w-7 h-7 bg-indigo-600 flex justify-center items-center font-extrabold rounded-xl"
+                            href="{{ route('notifiacaiones') }}">
+                            {{ auth()->user()->unreadNotifications->count() }}
+                        </a>
+                    @endif
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -90,6 +98,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         @auth
+
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('vacante.index')" :active="request()->routeIs('dashboard')">
                     {{ __('Vacantes') }}
@@ -119,6 +128,20 @@
                     </form>
                 </div>
             </div>
+            @if (auth()->user()->rol === 1)
+                <div class="my-3 mx-3 flex">
+                    <a class=" text-white mr-2 w-7 h-7 bg-indigo-600 flex justify-center items-center font-extrabold rounded-xl"
+                        href="{{ route('notifiacaiones') }}">
+                        {{ auth()->user()->unreadNotifications->count() }}
+                    </a>
+                    <p class="text-gray">
+                        @choice(
+                            'Notificacion|Notificaciones',
+                            auth()->user()->unreadNotifications->count(),
+                        )
+                    </p>
+                </div>
+            @endif
         @endauth
         @guest
             <div class="pt-2 pb-3 space-y-1">

@@ -38,5 +38,14 @@
                     href="{{ route('login') }}">Obten un cuenta y aplica</a>
             </p>
         </div>
+
+
     @endguest
+
+    @auth
+        @cannot('create', App\Models\Vacante::class)
+            <livewire:postular-vacante :vacante="$vacante" />
+        @endcan
+    @endauth
+
 </div>

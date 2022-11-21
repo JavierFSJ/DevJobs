@@ -9,8 +9,9 @@
                 <p class="text-sm text-gray-500 font-bold"> Ultimo día: {{ $vacante->ultimo_dia->format('d/m/Y') }}</p>
             </div>
             <div class="flex flex-col md:flex-row gap-3 items-strech md:items-center mt-5 md:mt-0 px-10">
-                <a href="#"
+                <a href="{{ route('candidatos.index' , $vacante) }}"
                     class="text-center bg-slate-800 py-2 px-4 rounded-lg text-white text-sm font-bold  hover:bg-slate-600 transition-colors">
+                    {{$vacante->cantidatos->count()}}
                     Candidatos
                 </a>
                 <a href="{{ route('vacante.edit' , $vacante ) }}"
